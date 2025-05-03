@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+    <script>
+        function validateAndCalculate() {
+            // Get input values
+            var notaPAC1 = parseFloat(document.getElementById('notaPAC1').value);
+            var notaPAC2 = parseFloat(document.getElementById('notaPAC2').value);
+            var notaPACOnline = parseFloat(document.getElementById('notaPACOnline').value);
+            var informesPractiques = parseFloat(document.getElementById('informesPractiques').value);
+            var examenPractiques = parseFloat(document.getElementById('examenPractiques').value);
+
+            // Validate input values
+            if (isNaN(notaPAC1) || notaPAC1 < 0 || notaPAC1 > 10 ||
+                isNaN(notaPAC2) || notaPAC2 < 0 || notaPAC2 > 10 ||
+                isNaN(notaPACOnline) || notaPACOnline < 0 || notaPACOnline > 10 ||
+                isNaN(informesPractiques) || informesPractiques < 0 || informesPractiques > 10 ||
+                isNaN(examenPractiques) || examenPractiques < 0 || examenPractiques > 10) {
+                alert("Totes les notes han de ser nombres reals entre 0 i 10.");
+                return;
+            }
+
+            // Calculate result
+            var resultat = (20-notaPAC1 * 1 -
+                            notaPAC2 * 1 -
+                            notaPACOnline * 0.40 -
+                            informesPractiques * 0.30 -
+                            examenPractiques * 0.30).toFixed(2);
+
+            // Display result
+            document.getElementById('result').innerText = "Has de treure un " + resultat + " del PAC3";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Què necessito del PAC3?</h1>
+        <div class="form-group">
+            <label for="notaPAC1">Nota PAC1:</label>
+            <input type="number" id="notaPAC1" step="0.01" min="0" max="10">
+        </div>
+        <div class="form-group">
+            <label for="notaPAC2">Nota PAC2:</label>
+            <input type="number" id="notaPAC2" step="0.01" min="0" max="10">
+        </div>
+        <div class="form-group">
+            <label for="notaPACOnline">Nota PAC online:</label>
+            <input type="number" id="notaPACOnline" step="0.01" min="0" max="10">
+        </div>
+        <div class="form-group">
+            <label for="informesPractiques">Informes pràctiques:</label>
+            <input type="number" id="informesPractiques" step="0.01" min="0" max="10">
+        </div>
+        <div class="form-group">
+            <label for="examenPractiques">Examen pràctiques:</label>
+            <input type="number" id="examenPractiques" step="0.01" min="0" max="10">
+        </div>
+        <button class="btn" onclick="validateAndCalculate()">Calcula</button>
+        <div class="result" id="result"></div>
+    </div>
+</body>
+</html>
